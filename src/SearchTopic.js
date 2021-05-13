@@ -28,19 +28,6 @@ class SearchTopic extends Component {
              }
              this.setState({ query : query})
             }
- /*        BooksAPI.search(query)
-        .then(searchBooks =>{
-            if(!searchBooks || searchBooks.error) {
-                this.setState({searchBooks:[],query:query})
-            } else {
-                this.setState({query:query, searchBooks: searchBooks.map((book) => {
-                    const currBook = this.props.books.find((t) => t.id ===book.id);
-                    book.shelf = currBook ? currBook.shelf: "none"
-                    return book;
-                })})
-            }
-        })
-    } */
 
     render(){
         return(
@@ -68,65 +55,6 @@ class SearchTopic extends Component {
         </div>
     </div>   
         )
-    }
-  /*   static propTypes = {
-        contacts : PropTypes.array.isRequired,
-        onDeleteContact : PropTypes.func.isRequired
-      }
-      
-    state = {
-        query: '',
-        ResultBooks:[]
-    }
-
-    UpdateQuery = (query) => {
-        BooksAPI.search(query)
-        .then(ResultBooks =>{
-            if (!ResultBooks || ResultBooks.error){
-                this.setState({ResultBooks:[], query:query.trim()})
-            } else {
-                this.setState({query:query.trim(), ResultBooks:ResultBooks.map((b) => {
-                  const prevState = this.props.books.find((sh)=>sh.id === b.id)
-                  b.shelf = prevState? prevState.shelf : 'none'
-                  return b
-                })})
-            }
-        })
-      }
-
-      clearQuery = () => {
-          this.UpdateQuery('')
-      }
-
-    render(){
-        const {query, ResultBooks} = this.state
-        return(
-            <div className="search-books">
-                <div className="search-books-bar close-search">
-                    <Link to='/'>Close</Link>
-                    <div className="search-books-input-wrapper">
-                    <input type="text" 
-                    placeholder="Search by title or author or category" 
-                    value={query}
-                    onChange={(event)=>this.UpdateQuery(event.target.value)}/>
-                    </div>
-                    
-                    {ResultBooks && ResultBooks.length>0 && (
-
-                <div className="search-books-results">
-                <ol className="books-grid">
-                    {ResultBooks.map((book)=>(
-                        <li key={book.id}>
-                            <SingleBook key={book.id} onShelfChange={this.onShelfChange} UpdateQuery={this.UpdateQuery}/>
-                        </li>
-                    ))}
-                </ol>
-                </div>
-                    )}
-            </div>
-        </div> 
-        )
-    }*/
-}
+    }}
 
 export default SearchTopic
