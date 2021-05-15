@@ -33,8 +33,8 @@ class SearchTopic extends Component {
 
     render(){
 
-        {this.state.searchBooks.length > 0 &&
-            this.state.searchBooks.map(book => {
+        this.state.searchBooks.length > 0 && (
+            this.state.searchBooks.forEach(book => {
                 const currentShelf = this.props.books.find(
                     searchBooks => searchBooks.id === book.id
                 )
@@ -43,7 +43,7 @@ class SearchTopic extends Component {
                         } else {
                             book.shelf = 'none'
                         }
-                    })}
+                    }))
 
 
         return(
@@ -58,7 +58,7 @@ class SearchTopic extends Component {
                     </div>
                 </div>
             <div className="search-books-results">
-                {this.state.NotFound === true  || this.state.searchBooks.error && (
+                {this.state.searchBooks.error && (
                 <ol className="books-grid">
                     Sorry, No Books matching your search subject. Please choose another search subject.
                 </ol>
