@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 import SingleBook from './SingleBook'
 
 
-class MoveOptions extends Component {
+class Shelves extends Component {
   render(){ 
-      const{name,ShelfOptions} = this.props
+      const{name,ShelfOptions,updateShelf} = this.props
   return(
     <div className="bookshelf">
       <h2 className="bookshelf-title">
@@ -14,7 +14,7 @@ class MoveOptions extends Component {
         <ol className="books-grid">
         {ShelfOptions && ShelfOptions.map((b)=>( 
             <li key={b.id}>
-              <SingleBook book={b} updateBooks={this.props.updateBooks}/>
+              <SingleBook book={b} updateShelf={updateShelf}/>
               </li>
             ))} 
           </ol>
@@ -24,4 +24,4 @@ class MoveOptions extends Component {
   }
  } 
 
-export default MoveOptions
+export default Shelves

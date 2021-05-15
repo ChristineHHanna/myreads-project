@@ -9,9 +9,12 @@ import BooksList from './BooksList'
 class BooksApp extends Component {
   state = {
     books: [],
-    searchBooks:[]
-
+    searchBooks:[],
+    query:'',
+    NotFound: false,
   }
+    timeout= null
+  
 
   componentDidMount = () =>{
     this.getAllData()
@@ -28,30 +31,45 @@ class BooksApp extends Component {
       console.log(this.state.books);
   }
    
+  updateShelf = (book, shelf) =>{
+    book.shelf = shelf
 
-   updateBooks = (book,shelf) => {
-    BooksAPI.update(book, shelf); 
-    if(this.state.books.filter((b)=> b.id === book.id)) {
-      this.setState({books: this.state.books.map((sh)=> {
-        if (book.id === sh.id)
-          sh.shelf = shelf
-          return sh 
-      })
-    })
-    } else {
-      book.shelf = shelf;
-      this.setState({books: this.setState.books.concate([book])
+    BooksAPI.update(book, shelf)
+    .then(books => {
+        this.setState(state => ({
+            books: state.books.filter(b => b.id !== book.id).concat([ book ])
+        }))
     })
   }
-  }
 
+  updateQuery = (query) => {
+    if(this.timeout){
+        clearTimeout(this.timeout);
+        this.timeout=null
+    }
+     if (query) {
+        this.timeout = setTimeout(() =>{
+           BooksAPI.search(query)
+           .then(books =>{
+               this.setState({searchBooks: books});
+               this.setState({NotFound:false}) 
+           })}, 800)
+       } else {
+        this.setState({searchBooks:[]});
+        this.setState({NotFound:true})
+        }
+        this.setState({ query : query});
+       }
+ 
   render() {
     return (
 
      <div className="app">
            <div className="route">
-             <Route exact path='/' render={()=><BooksList books={this.state.books} updateBooks={this.updateBooks}/>}/>
-             <Route exact path='/search' render={() => <SearchTopic books={this.state.books} updateBooks={this.updateBooks} searchBooks={this.state.searchBooks}/>} />
+             <switch>
+             <Route exact path='/' render={()=><BooksList books={this.state.books} updateShelf={this.updateShelf}/>}/>
+             <Route exact path='/search' render={() => <SearchTopic books={this.state.books} updateShelf={this.updateShelf} searchBooks={this.state.searchBooks} updateQuery={this.updateQuery}/>} />
+             </switch>
           </div>
       </div> 
     )

@@ -1,17 +1,17 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
-import MoveOptions from './Shelves'
+import Shelves from './Shelves'
 
-function BooksList ({books, updateBooks}) {
+function BooksList ({books, updateShelf}) {
     return (
         <div className='list-books'>
         <div className='list-books-title'>
             <h1> MyReads </h1>
         </div>
             <div className='list-books-content'>
-            <MoveOptions key='currentlyReading' name="Currently Reading" ShelfOptions={books.filter(book=> book.shelf === "currentlyReading")} updateBooks={updateBooks}/>
-            <MoveOptions key='wantToRead' name="Want to Read" ShelfOptions={books.filter(book=> book.shelf === "wantToRead")} updateBooks={updateBooks}/>
-            <MoveOptions key='read' name="Read" ShelfOptions={books.filter(book=> book.shelf === "read")} updateBooks={updateBooks}/>
+            <Shelves key='currentlyReading' name="Currently Reading" ShelfOptions={books.filter(book=> book.shelf === "currentlyReading")} updateShelf={updateShelf}/>
+            <Shelves key='wantToRead' name="Want to Read" ShelfOptions={books.filter(book=> book.shelf === "wantToRead")} updateShelf={updateShelf}/>
+            <Shelves key='read' name="Read" ShelfOptions={books.filter(book=> book.shelf === "read")} updateShelf={updateShelf}/>
             </div>
             <div className='open-search'>
             <Link to='/search'>Add a book</Link>
