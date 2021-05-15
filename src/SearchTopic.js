@@ -45,17 +45,6 @@ class SearchTopic extends Component {
                         }
                     })}
 
-        
-        const updatedBooks = this.props.searchBooks.map(book => {
-            this.props.books.map(b => {
-                if(b.id === this.props.books.id) {
-                    this.props.books.shelf = b.shelf;
-                }
-                
-            })
-            return book
-        })
-
 
         return(
             <div className="search-books">
